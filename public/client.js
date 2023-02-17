@@ -6,6 +6,10 @@ var turn = 0
 var lastMove
 var one = document.getElementById("one") // sound for cell complete
 var two = document.getElementById("two") // sound for new user connected
+var yt = document.getElementById("yt") // sound for your turn
+var wina = document.getElementById("wina") // sound for winner abhi
+var wins = document.getElementById("wins") // sound for winner abhi
+
 
 
 // function to disable user from playing move :
@@ -88,11 +92,13 @@ if(!block)
         else if(status == 'turnY')
         {
             document.querySelector('#turn').innerHTML = `Your turn (Last Move: ${lastMove})` ;
+            yt.play();
         }
     
         else if(status == 'turn')
         {
             document.querySelector('#turn').innerHTML = `Opponent's turn` ;
+
         }
         else {
             newp.innerHTML = `${username} got disconnected ....`;
@@ -346,7 +352,15 @@ function changeColor(c, type) {
     if (Completer == 5) {
 
         socket.emit('winner', (username));
-      
+        
+        if(username == 'Abhishek')
+        {
+            wina.play() ;
+        }
+        else
+        {
+            wins.play();
+        }
         setTimeout(() => {
          location.href = "https://media.tenor.com/-Yf9G_sGZ-8AAAAC/youre-a-winner-winner.gif" ;
         }, 2000);
