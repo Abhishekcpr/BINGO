@@ -12,6 +12,14 @@ var wina = document.getElementById("wina") // sound for winner abhi
 var wins = document.getElementById("wins") // sound for winner abhi
 
 
+// function to convert text to speech :
+let synth = speechSynthesis;
+voiceSelected = "Google हिन्दी" ;
+function textToSpeech(text){
+    let utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = voiceSelected;  
+    synth.speak(utterance);    
+}
 
 // function to disable user from playing move :
 function Access(controller) {
@@ -38,6 +46,8 @@ do {
 } while (!username)
 
 if (username) {
+
+    textToSpeech(`${username}, welcome to awesome bingo game coded by Abhishek`)
     socket.emit('user-data', (username));
     Access(1);
 }
@@ -83,7 +93,7 @@ if(!block)
     
         else if(status == 'winner')
         {
-            document.querySelector('#turn').innerHTML = `${player} wins ...` ;
+            document.querySelector('#turn').innerHTML = `${username} wins ...` ;
             block = true ;
             
         }
@@ -93,7 +103,8 @@ if(!block)
         else if(status == 'turnY')
         {
             document.querySelector('#turn').innerHTML = `Your turn (Last Move: ${lastMove})` ;
-            yt.play();
+            // yt.play();
+            textToSpeech(` ${username} it's your turn`);
         }
     
         else if(status == 'turn')
