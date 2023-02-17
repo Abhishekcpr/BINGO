@@ -1,4 +1,5 @@
 
+
 // const socket = io("ws://localhost:8000");
 const socket = io.connect();
 var username;
@@ -397,6 +398,13 @@ function changeColor(c, type) {
 
 
 }
+
+
+
+
+
+
+
 
 
 
